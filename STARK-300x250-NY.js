@@ -1,166 +1,141 @@
 (function () {
-var script = document.createElement("script");
-script.src = "https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.11.1_min.js";
-document.head.appendChild(script);
+
   var clickUrl = window.clickTag || window.clickTAG || "https://www.stark.dk/services";
 
-  var bannerContent = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  // LOAD GSAP
+  var script = document.createElement("script");
+  script.src = "https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.11.1_min.js";
+  script.onload = initBanner;
+  document.head.appendChild(script);
 
-<style>
-html, body {
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-}
+  function initBanner() {
 
-#container {
-  position:relative;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family: Arial, sans-serif;
-}
+    var html = `
+      <div id="stark-banner" style="
+        width:100%;
+        max-width:300px;
+        aspect-ratio:300/250;
+        position:relative;
+        overflow:hidden;
+        font-family: Arial, sans-serif;
+        cursor:pointer;
+      ">
 
-/* LAYOUTS */
-.layout {
-  position:absolute;
-  width:100%;
-  height:100%;
-}
+        <!-- DESKTOP -->
+        <div class="layout desktop">
+          <img src="https://cloud.adjust-digital.com/creatives/056f3780641e8d6223a7115111f24cca/assets/v1_bg.jpg" class="bg">
+          <div class="txt txt1" id="txt1_d">Få styr på dit projekt</div>
+          <div class="txt txt2" id="txt2_d">STARK hjælper dig</div>
+          <div class="btn">Læs mere</div>
+        </div>
 
-/* Desktop default */
-.mobile { display:none; }
+        <!-- MOBILE -->
+        <div class="layout mobile">
+          <img src="https://cloud.adjust-digital.com/creatives/056f3780641e8d6223a7115111f24cca/assets/v2_bg.jpg" class="bg">
+          <div class="txt txt1" id="txt1_m">STARK hjælper dig</div>
+          <div class="txt txt2" id="txt2_m">Kom godt i gang</div>
+          <div class="btn">Læs mere</div>
+        </div>
 
-/* MOBILE BREAKPOINT */
-@media (max-width: 480px) {
+        <div id="clickLayer"></div>
 
-  .desktop { display:none; }
-  .mobile { display:block; }
+      </div>
+    `;
 
-}
+    document.write(html);
 
-/* ELEMENTS */
-.topLeft { position:absolute; top:0; left:0; width:100%; }
+    // STYLE
+    var style = document.createElement("style");
+    style.innerHTML = `
+      .layout {
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+      }
 
-.txt {
-  position:absolute;
-  width:100%;
-  text-align:center;
-  color:white;
-  font-weight:bold;
-}
+      .mobile { display:none; }
 
-.txt1 { top:20%; font-size:18px; }
-.txt2 { top:20%; font-size:18px; opacity:0; }
+      @media (max-width:600px) {
+        .desktop { display:none; }
+        .mobile { display:block; }
+      }
 
-/* MOBILE TEXT */
-.mobile .txt1,
-.mobile .txt2 {
-  font-size:22px;
-  top:25%;
-}
+      .bg {
+        position:absolute;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
 
-/* CTA */
-.btn {
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#ffd500;
-  color:#000;
-  padding:10px 15px;
-  font-weight:bold;
-  font-size:14px;
-}
+      .txt {
+        position:absolute;
+        width:100%;
+        text-align:center;
+        color:white;
+        font-weight:bold;
+      }
 
-/* MOBILE CTA */
-.mobile .btn {
-  font-size:18px;
-  padding:14px 20px;
-}
+      .txt1 { top:20%; font-size:18px; }
+      .txt2 { top:20%; font-size:18px; opacity:0; }
 
-/* CLICK LAYER */
-#clickLayer {
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  z-index:9999;
-  cursor:pointer;
-}
-</style>
-</head>
+      .mobile .txt1,
+      .mobile .txt2 {
+        font-size:22px;
+        top:25%;
+      }
 
-<body>
+      .btn {
+        position:absolute;
+        bottom:20px;
+        left:50%;
+        transform:translateX(-50%);
+        background:#ffd500;
+        color:#000;
+        padding:10px 15px;
+        font-weight:bold;
+        font-size:14px;
+      }
 
-<div id="container">
+      .mobile .btn {
+        font-size:18px;
+        padding:14px 20px;
+      }
 
-  <!-- DESKTOP -->
-  <div class="layout desktop">
-    <img src="https://cloud.adjust-digital.com/creatives/056f3780641e8d6223a7115111f24cca/assets/v1_bg.jpg" class="topLeft">
-    <div class="txt txt1" id="txt1_d">Få styr på dit projekt</div>
-    <div class="txt txt2" id="txt2_d">STARK hjælper dig</div>
-    <div class="btn">Læs mere</div>
-  </div>
+      #clickLayer {
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        z-index:10;
+      }
+    `;
+    document.head.appendChild(style);
 
-  <!-- MOBILE -->
-  <div class="layout mobile">
-    <img src="https://cloud.adjust-digital.com/creatives/056f3780641e8d6223a7115111f24cca/assets/v2_bg.jpg" class="topLeft">
-    <div class="txt txt1" id="txt1_m">STARK hjælper dig</div>
-    <div class="txt txt2" id="txt2_m">Kom godt i gang</div>
-    <div class="btn">Læs mere</div>
-  </div>
+    // ANIMATION
+    var tl_d = gsap.timeline({ repeat: 3, repeatDelay: 3 });
 
-  <div id="clickLayer"></div>
+    tl_d
+      .to("#txt1_d", {opacity:0, duration:0.5, delay:3})
+      .to("#txt2_d", {opacity:1, duration:0.5})
+      .to("#txt2_d", {opacity:0, duration:0.5, delay:3})
+      .to("#txt1_d", {opacity:1, duration:0.5});
 
-</div>
+    var tl_m = gsap.timeline({ repeat: 3, repeatDelay: 3 });
 
-<script>
+    tl_m
+      .to("#txt1_m", {opacity:0, duration:0.6, delay:3})
+      .to("#txt2_m", {opacity:1, duration:0.6})
+      .to("#txt2_m", {opacity:0, duration:0.6, delay:3})
+      .to("#txt1_m", {opacity:1, duration:0.6});
 
-/* DESKTOP ANIMATION */
-var tl_d = gsap.timeline({ repeat: 3, repeatDelay: 3 });
+    // CLICK
+    document.getElementById("clickLayer").onclick = function () {
+      window.open(clickUrl, "_blank");
+    };
 
-tl_d
-  .to("#txt1_d", {opacity:0, duration:0.5, delay:4})
-  .to("#txt2_d", {opacity:1, duration:0.5})
-  .to("#txt2_d", {opacity:0, duration:0.5, delay:4})
-  .to("#txt1_d", {opacity:1, duration:0.5});
-
-/* MOBILE ANIMATION */
-var tl_m = gsap.timeline({ repeat: 3, repeatDelay: 3 });
-
-tl_m
-  .to("#txt1_m", {opacity:0, duration:0.8, delay:4})
-  .to("#txt2_m", {opacity:1, duration:0.8})
-  .to("#txt2_m", {opacity:0, duration:0.8, delay:4})
-  .to("#txt1_m", {opacity:1, duration:0.8});
-
-/* CLICK */
-document.getElementById("clickLayer").onclick = function () {
-  window.open(clickUrl, "_blank");
-};
-
-</script>
-
-</body>
-</html>
-`;
-
-  var html = `
-    <div style="width:100%;max-width:300px;aspect-ratio:300/250;">
-      <iframe 
-        srcdoc='${bannerContent.replace(/'/g, "&apos;")}'
-        style="width:100%;height:100%;border:0;"
-      ></iframe>
-    </div>
-  `;
-
-  document.write(html);
+  }
 
 })();
