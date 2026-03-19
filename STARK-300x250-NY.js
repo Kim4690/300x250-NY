@@ -1,5 +1,7 @@
 (function () {
-
+var script = document.createElement("script");
+script.src = "https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.11.1_min.js";
+document.head.appendChild(script);
   var clickUrl = window.clickTag || window.clickTAG || "https://www.stark.dk/services";
 
   var bannerContent = `
@@ -7,8 +9,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script src="https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.11.1_min.js"></script>
 
 <style>
 html, body {
@@ -143,7 +143,7 @@ tl_m
 
 /* CLICK */
 document.getElementById("clickLayer").onclick = function () {
-  window.open(parent.clickTag || parent.clickTAG || "${clickUrl}", "_blank");
+  window.open(parent.clickTag || clickUrl || "${clickUrl}", "_blank");
 };
 
 </script>
