@@ -126,18 +126,20 @@ html, body {
 /* DESKTOP ANIMATION */
 var tl_d = gsap.timeline({ repeat: 3, repeatDelay: 3 });
 
-tl_d.to("#txt1_d", {opacity:0, duration:0.5, delay:8})
-    .to("#txt2_d", {opacity:1, duration:0.5})
-    .to("#txt2_d", {opacity:0, duration:0.5, delay:8})
-    .to("#txt1_d", {opacity:1, duration:0.5});
+tl_d
+  .to("#txt1_d", {opacity:0, duration:0.5, delay:8})
+  .to("#txt2_d", {opacity:1, duration:0.5})
+  .to("#txt2_d", {opacity:0, duration:0.5, delay:8})
+  .to("#txt1_d", {opacity:1, duration:0.5});
 
 /* MOBILE ANIMATION */
 var tl_m = gsap.timeline({ repeat: 3, repeatDelay: 3 });
 
-tl_m.to("#txt1_m", {opacity:0, duration:0.8, delay:4})
-    .to("#txt2_m", {opacity:1, duration:0.8})
-    .to("#txt2_m", {opacity:0, duration:0.8, delay:4})
-    .to("#txt1_m", {opacity:1, duration:0.8});
+tl_m
+  .to("#txt1_m", {opacity:0, duration:0.8, delay:4})
+  .to("#txt2_m", {opacity:1, duration:0.8})
+  .to("#txt2_m", {opacity:0, duration:0.8, delay:4})
+  .to("#txt1_m", {opacity:1, duration:0.8});
 
 /* CLICK */
 document.getElementById("clickLayer").onclick = function () {
