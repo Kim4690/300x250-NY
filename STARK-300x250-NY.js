@@ -126,17 +126,17 @@ html, body {
 /* DESKTOP ANIMATION */
 var tl_d = gsap.timeline({ repeat: -1 });
 
-tl_d.to("#txt1_d", {opacity:0, duration:0.8, delay:2})
+tl_d.to("#txt1_d", {opacity:0, duration:0.8, delay:4})
     .to("#txt2_d", {opacity:1, duration:0.8})
-    .to("#txt2_d", {opacity:0, duration:0.8, delay:2})
+    .to("#txt2_d", {opacity:0, duration:0.8, delay:4})
     .to("#txt1_d", {opacity:1, duration:0.8});
 
 /* MOBILE ANIMATION */
 var tl_m = gsap.timeline({ repeat: -1 });
 
-tl_m.to("#txt1_m", {opacity:0, duration:0.8, delay:2})
+tl_m.to("#txt1_m", {opacity:0, duration:0.8, delay:4})
     .to("#txt2_m", {opacity:1, duration:0.8})
-    .to("#txt2_m", {opacity:0, duration:0.8, delay:2})
+    .to("#txt2_m", {opacity:0, duration:0.8, delay:4})
     .to("#txt1_m", {opacity:1, duration:0.8});
 
 /* CLICK */
