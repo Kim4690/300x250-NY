@@ -143,7 +143,7 @@ tl_m
 
 /* CLICK */
 document.getElementById("clickLayer").onclick = function () {
-  window.open(parent.clickTag || clickUrl || "${clickUrl}", "_blank");
+  window.open(clickUrl, "_blank");
 };
 
 </script>
