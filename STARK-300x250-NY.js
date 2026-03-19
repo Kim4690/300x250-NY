@@ -126,10 +126,10 @@ html, body {
 /* DESKTOP ANIMATION */
 var tl_d = gsap.timeline({ repeat: -1 });
 
-tl_d.to("#txt1_d", {opacity:0, duration:0.8, delay:4})
-    .to("#txt2_d", {opacity:1, duration:0.8})
-    .to("#txt2_d", {opacity:0, duration:0.8, delay:4})
-    .to("#txt1_d", {opacity:1, duration:0.8});
+tl_d.to("#txt1_d", {opacity:0, duration:0.2, delay:4})
+    .to("#txt2_d", {opacity:1, duration:0.2})
+    .to("#txt2_d", {opacity:0, duration:0.2, delay:4})
+    .to("#txt1_d", {opacity:1, duration:0.2});
 
 /* MOBILE ANIMATION */
 var tl_m = gsap.timeline({ repeat: -1 });
